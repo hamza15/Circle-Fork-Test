@@ -8,7 +8,7 @@ def helloIndex():
 
 @app.route('/test')
 def test():
-    return render_template("page4.html")
+    return render_template("page2.html")
 
 @app.route('/page')
 def deploy():
