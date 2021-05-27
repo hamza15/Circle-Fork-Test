@@ -56,7 +56,6 @@ workflows:
       - deploy:
            requires:
              - run_tests # Only run deploy job once the build job has completed
-             - run_second_test
            filters:
              branches:
                only: master
