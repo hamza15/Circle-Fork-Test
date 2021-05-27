@@ -47,6 +47,20 @@ jobs:
           name: Run Unit Tests Again
           command: |
             pytest
+  run_fourth_test:
+    docker:
+    - image: circleci/python:3.7.4
+    steps:
+      - checkout
+      - run:
+          name: Install Python Dependencies
+          command: |
+            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
+            pip install --user -r webserver/requirements.txt
+      - run:
+          name: Run Unit Tests Again
+          command: |
+            pytest
   deploy:
     docker:
       - image: circleci/python:3.7.4
@@ -68,4 +82,7 @@ workflows:
       - run_tests
       - run_second_test
       - run_third_test
+      - run_fourth_test:
+          requires:
+            - run_tests
       - deploy
