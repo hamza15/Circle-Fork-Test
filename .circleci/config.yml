@@ -53,14 +53,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Python Dependencies
+          name: Get workflow ID
           command: |
-            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
-            pip install --user -r webserver/requirements.txt
-      - run:
-          name: Run Unit Tests Again
-          command: |
-            pytest
+            echo $CIRCLE_WORKFLOW_ID
+            curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID
   deploy:
     docker:
       - image: circleci/python:3.7.4
